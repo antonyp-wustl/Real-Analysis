@@ -1,0 +1,27 @@
+\documentclass{amsart}
+\usepackage{amsmath,amsthm,amssymb}
+\title{Homework 1}
+\author{Antony Perez}
+\date{\today}
+\begin{document}
+\maketitle
+\subsection*{Problem 1} If $r$ is rational ($r \neq 0$) and $x$ is irrational, prove that $r+x$ and $rx$ is irrational. 
+\begin{proof}
+    Suppose $r+x$ is rational. Let $\alpha$ be some rational. We have $r+x = \alpha \implies x = \alpha - r$. This is a contradiction, since an irrational cannot equal a rational difference. Now, using $\alpha$, assume that $rx$ is rational. We have $rx = \alpha \implies x = \frac{\alpha}{r}$ (using the fact $r \neq 0 $). This is contradictory because an irrational cannot equal a rational quotient. 
+\end{proof}
+\subsection*{Problem 2} Let $E$ be a nonempty subset of an ordered set; suppose $\alpha$ is a lower bound of $E$ and $\beta$ is an upper bound of $E$. Prove that $\alpha \leq \beta$.
+\begin{proof}
+    Let $x \in E$. We are given that $\alpha$ is a lower bound of $E$, and $\beta$ is an upper bound for $E$. By definition, $\alpha \leq x $, and $x \leq \beta $. Thus $\alpha \leq x \leq \beta \implies \alpha \leq \beta$.  
+\end{proof}
+\subsection*{Problem 3} Let $A$ be a nonempty set of real numbers which is bounded below. Let $-A$ be the set of all numbers $-x$, where $x \in A$. Prove that \[\inf A = - \sup (-A)\]
+\begin{proof}
+    We are given that $A$ is non-empty and bounded below. Let $\ell = \{x \in \mathbb{R} : \forall a \in A, \ x \leq a\}$. 
+    By the completeness axiom, we may deduce that $\alpha = \sup(\ell)$. This implies that $\alpha \leq a \implies \alpha = \inf (A)$. Now using the inequality, multiplying $A$ by -1, our inequality becomes $-\alpha \geq -a $. 
+    We know $-\alpha$ is an upper bound for $-A$. Let $u$ be any upper bound for $-A$. Thus, $-a \leq u \implies a \geq -u$. So $-u$ is a lower bound for $A$. But $\alpha = \inf(A)$, so $\alpha \geq -u \implies -\alpha \leq u$. So $-\alpha=\sup(-A)$.
+    Therefore, $\inf(A)=-\sup(-A)=\alpha$.
+\end{proof}
+\subsection*{Problem 4} Suppose $S$ is an ordered set with the greatest lower bound property. Show $S$ has the least upper bound property. 
+\begin{proof}
+Let $U$ be a non-empty subset of $S$ that is bounded above. Define $K =\{s \in S: s \text{ is an upper bound for } U\}$, where $K \neq \emptyset$ since $U$ is known to be bounded. Using the greatest lower bound property, $\beta = \inf(K) \Longleftrightarrow \forall k \in K,\ \beta \leq k$. Assume that for $s \in U$, $s > \beta$. We know that $\forall k \in K, \ s \leq k$. But $\inf(K)=\beta$ and is the greatest lower bound for $K$. So $s \leq \beta$, which is contradictory to our supposition. Therefore $s \leq \beta \implies \beta = \sup(U)$ shows that $S$ has the least upper bound property. 
+\end{proof}
+    \end{document}
