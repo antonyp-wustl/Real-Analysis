@@ -1,0 +1,57 @@
+\documentclass{amsart}
+
+\usepackage{amsthm,amssymb,amsmath,enumitem}
+
+\title{Homework 2}
+\author{Antony Perez}
+
+\begin{document}
+\maketitle
+\subsection*{Problem 1} 
+Let $b > 1$. 
+\begin{enumerate}[label=(\alph*)]
+    \item If $m,n,p,q$ are integers, $n > 0, q > 0$, and $r = \frac{m}{n}=\frac{p}{q}$, prove that \[(b^m)^{1/n} = (b^p)^{1/q}.\] Hence it makes sense to define $b^r = (b^m)^{1/n}$.
+    \item Prove that $b^{r+s}=b^rb^s$ if $r$ and $s$ are rational.
+    \item If $x \in \mathbb{R}$, define \[B(x) = \{b^t : t \in \mathbb{Q}, t \leq x\}. \] Prove that $b^r = \sup B(r)$ when $r \in \mathbb{Q}$, and use this to define \[b^x = \sup B(x) \text{ for every } x \in \mathbb{R}.\]
+    \item Prove that $b^{x+y} = b^xb^y$ for all real $x,y$. 
+\end{enumerate}
+\begin{proof}
+    \textbf{A.} We are given that $\frac{m}{n} = \frac{p}{q} = r$, and an arbitrary real number $b > 1$. We can clearly deduce that $b = b$. Now raise $b$ to the power of $r$ for both sides: $b^r = b^r$. Now, for the LHS, let $r = \frac{m}{n}$, and $r = \frac{p}{q}$ for the RHS: $b^{m/n} = b^{p/q}$. Now, through exponent rules, we arrive at the conclusion that $b^r = (b^m)^{1/n} = (b^p)^{1/q}$.
+\end{proof}
+\begin{proof}
+    \textbf{B.} We are given that $r$ and $s$ are rational numbers, and are asked to prove the statement $b^{r+s} = b^rb^s$. Let $r = \frac{m}{n}$ and $s = \frac{p}{q}$, where $m,n,p,q \in \mathbb{Z},  n ,q \neq 0$.
+    We can use this to show that $r+s = \frac{mq+np}{nq}$. Now, raise $b^{r+s}$, which may be denoted as $b^{\frac{mq+np}{nq}}$. We can deduce that $mq + np$ is addition between two integers. So, let $\alpha = mq$ and $\beta =  np$, where $\alpha,\beta \in \mathbb{Z}$.
+    We must show that $b^{\alpha + \beta} = b^{\alpha}b^{\beta}$. Assuming $\alpha, \beta \geq 0$, we can illustrate their equivalence: 
+    \[
+    \underbrace{ b\cdot \ldots \cdot b}_{\alpha + \beta \ b's} = \underbrace{\overbrace{(b \cdot \ldots \cdot b)}^{\alpha \ b's} \overbrace{(b \cdot \ldots \cdot b)}^{\beta \ b's} }_{\alpha + \beta \ b's}
+    \]
+    therefore, $b^{\alpha + \beta} = b^{\alpha} b^{\beta}$. If either $\alpha$ or $\beta < 0$, then we can represent this as $b^{-\alpha} = \frac{1}{b^\alpha}$. We can use this result now to show that $(b^\alpha b^\beta)^\frac{1}{nq}$. We can do this because of our result in \textbf{A}. Now, we can distribute the power into the $b$'s, giving us $b^rb^s$.
+    Thus, $b^{r+s} = b^rb^s$
+\end{proof}
+\begin{proof}
+    \textbf{C.} We are given the set $B(x) = \{ b^t : t \in \mathbb{Q}, t \leq x \}$, and we are trying to prove when our input $r \in \mathbb{Q}$, then $b^r = \sup B(x)$.
+    Consider a rational $r$ such that $B(r) = \{b^t : t \in \mathbb{Q}, t \leq r\}$. Now we have the inequality $t \leq r \implies b^t \leq b^r$, where $b^r \in B(r)$ due to $r$'s rationality. We can show that this is the case due to the monotonicity of the set. Since both $t,r \in \mathbb{Q}$, then $\exists! t = r$. Thus, since $t \leq r$, $\max B(r) = b^r \implies \sup B(r) = b^r$. 
+    Now consider the real number $x$ such that $B(x) = \{b^t : t \in \mathbb{Q}, t \leq x\}$. We can show that $B(x)$ is non empty since we know that there exists a rational $-r < x < r$, so $B(-r)$ exists, and $B(x) \neq \emptyset$. Now we can choose a rational $r$ that is greater than $x$ and we show that $x < r \implies b^r$ is an upper bound of $B(x)$. Therefore, by the L.U.B property, $\sup B(x)$ exists. If $x$ is rational, then $\sup B(x) = b^x$ by definition. This applies to $x \in \mathbb{R}$. Thus, $\sup B(x) = b^x$. 
+\end{proof}
+\begin{proof}
+    \textbf{D.} Through \textbf{B}, we've shown that if $x,y$ are both rationals, then this works out. Therefore, let's assume that $x$ or $y$ are irrational. Using the result from \textbf{C}, we can take two rationals $r+s \leq x+y$, where $r \leq x$ and $s \leq y$, which gives $b^{r+s} \in B(x+y)$, and, using \textbf{B}, $b^{r+s}=b^rb^s$. Since $b^r \leq b^x$ and $b^s \leq b^y$ so $b^rb^s \leq b^xb^y$. Thus, $b^{x+y} \leq b^xb^y$. We can also show that $b^{r+s} \leq b^{x+y} \implies b^xb^y \leq b^{x+y}$. So, $b^{x+y} = b^xb^y$.
+\end{proof}
+\subsection*{Problem 2} If $z \in \mathbb{C}$ satisfies $|z| = 1$ (that is, $z \bar{z} = 1$), compute \[|1+z|^2 + |1-z|^2.\]
+\begin{proof}
+    We know $z = x + iy$ and $\bar{z} = x-iy$ for $x,y \in \mathbb{R}$, and that $|z| = \sqrt{x^2+y^2}$. Now, we have $|1+x+iy|^2 + |1-x-iy|^2 = (1+x)^2+y^2 + (1-x)^2 + y^2 = 2+2x^2+2y^2 = 2(1 + x^2+y^2) = 2(1 + |z|^2).$
+\end{proof}
+\subsection*{Problem 3} Suppose $k \geq 3, x,y \in \mathbb{R}^k, |x-y| = d > 0$, and $r > 0$. Prove: 
+\begin{enumerate}[label=(\alph*)]
+    \item If $2r > d$, there are infinitely many $z \in \mathbb{R}^k$ such that $|z-x|=|z-y|=r$.
+    \item If $2r = d$, there is exactly one such $z$.
+    \item If $2r < d$, there is no such $z$.
+\end{enumerate}
+How must these statement be modified if $k = 2$ or $k = 1$?
+\begin{proof}
+     Let $d = d(x,y)$, and let $m= (x+y)/2$. Let $z$ be perpendicular to the line segment generated by $x,y$. We see that $d(z,m) =\sqrt{r^2-(d/2)^2}=R$. From this, we see that $d(z,m)>0$ and it tells us the distance between $m$ and $z$. Denote this as $L$. From this, we see that $r = d/2 \implies L = \sqrt{r^2 - (d/2)^2} > 0$. Since $k \geq 3$ and $L > 0$, this actually forms a sphere, thus making $z$ be infinitely many points as long as it is perpendicular and equal to $L$. 
+     If $r = d/2$, then $d(z,m)^2 = r^2 - d^2/4 = 0$, so $z = m$, proving that there is only one $z$ that works. 
+     If $r < d/2$, then $r^2 - d^2/4 < 0$, but $d(z,m) > 0$, so this is impossible. 
+     If $k=2$, then you wouldn't get infinite points for the first case, and only get one because it is no longer a sphere. 
+     For $k =1$, There would be no solutions because you're practically on a line. 
+\end{proof}
+\end{document}
