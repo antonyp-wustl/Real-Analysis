@@ -1,0 +1,154 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+
+% Vertical space to leave for answers
+\newcommand{\defspace}{\vspace{1.5in}}
+\newcommand{\tfspace}{\vspace{0.5in}}
+\newcommand{\proofspace}{\vspace{3in}}
+
+\title{Math 4317 : Real Analysis I \\ Mid-Term Exam 1}
+\date{25 September 2012}
+\author{}
+
+\begin{document}
+\maketitle
+
+\noindent \textbf{Instructions:} Answer all of the problems.
+
+\section*{Definitions (2 points each)}
+
+\begin{enumerate}
+    \item State the definition of a metric space.
+    
+
+    A metric space is a space with distance defined within a point set, $X$. This distance follows three axioms:
+    \\ 
+    $d(x,y) > 0$
+    \\
+    $d(x,y) = 0 \Longleftrightarrow x = y$ 
+    \\
+    $d(x,z) \leq d(x,y) + d(y,z)$
+    \item State the definition of an open set in a metric space. \\ 
+    An open set in a metric space occurs when an open ball $B(x,r) \subseteq E \ \forall r > 0 $. 
+
+    \item State the definition of the greatest lower bound of a set of real numbers.
+    
+    The greatest lower bound for a set $X$ is when $\forall x \in X$, there exists a value $\alpha \leq x$. With $\alpha'$ being some other lower bound, we have $\alpha ' < \alpha \leq x$.
+
+    \item State the definition for a set to be countable.
+    
+    A set $X$ is countable if there exists a bijection $f: X \rightarrow \mathbb{N}$
+
+    \item State the Least Upper Bound Property of $\mathbb{R}$.
+    \defspace
+\end{enumerate}
+
+\newpage
+\section*{True or False (1 point each)}
+
+\begin{enumerate}
+    \item If $F$ is a set in a metric space that is not closed, then it is open.
+    \tfspace
+
+    \item If $F$ is closed and $K$ is compact, then $F \cap K$ is compact.
+    \tfspace
+
+    \item For any collection $\{G_\alpha\}$ of open sets, $\bigcup_\alpha G_\alpha$ is open.
+    \tfspace
+
+    \item For any finite collection $\{F_1, \ldots, F_n\}$ of closed sets, $\bigcup_{j=1}^n F_j$ is closed.
+    \tfspace
+
+    \item Let $(X,d)$ be a metric space. For $x \in X$ and $r > 0$ the set
+    \[
+        B_r(x) = \{ y \in X : d(x,y) < r \}
+    \]
+    is open.
+    \tfspace
+
+    \item If $x, y \in \mathbb{R}^n$, then
+    \[
+        \left| \sum_{j=1}^n x_j y_j \right| \leq \left( \sum_{j=1}^n x_j^2 \right)^{\frac{1}{2}} \left( \sum_{j=1}^n y_j^2 \right)^{\frac{1}{2}}.
+    \]
+    \tfspace
+
+    \item In a metric space $X$, the set $X$ is the only set that is both open and closed.
+    \tfspace
+
+    \item For any collection of compact sets $\{K_\alpha\}$, $\bigcup_\alpha K_\alpha$ is compact.
+    \tfspace
+
+    \item If $E$ is a nonempty subset of $\mathbb{R}$ that is bounded from below, then $\inf E \in E$.
+    \tfspace
+
+    \item The set of all irrational numbers is countable.
+    \tfspace
+
+    \item A set is open if and only if it is equal to its interior.
+    \tfspace
+
+    \item A set is closed if and only if it contains its boundary.
+    \tfspace
+
+    \item A set in an arbitrary metric space is compact if and only if it is closed and bounded.
+    \tfspace
+
+    \item In a metric space $(X,d)$, one has that $\bigcap_{r > 0} B_r(x) = \varnothing$.
+    \tfspace
+
+    \item Every infinite subset of a countable set is countable.
+    \tfspace
+\end{enumerate}
+
+\newpage
+\section*{Proofs (15 pts each)}
+
+\begin{enumerate}
+    \item A set $S$ in a metric space $(X,d)$ is called \emph{totally bounded} if for any $\varepsilon > 0$ there exists a finite subset $T$ of $S$ such that
+    \[
+        S \subset \bigcup_{x \in T} B_\varepsilon(x).
+    \]
+    Let $K \subset X$ be a compact subset of the metric space $(X,d)$. Prove that $K$ is totally bounded.
+    \proofspace
+    \newpage
+
+    \item Let $A$ be a non-empty set of real numbers which is bounded below. Let
+    \[
+        -A = \{ -x : x \in A \}.
+    \]
+    Prove that
+    \[
+        \inf A = -\sup(-A).
+    \]
+    \proofspace
+    \newpage
+
+    \item Let $a \in \mathbb{R}$ with $a > -1$. Prove that $(1+a)^n \geq 1 + na$ for all $n \in \mathbb{N}$.
+    \proofspace
+    \newpage
+
+    \item Let
+    \[
+        X = \left\{ x = (x_1, x_2, x_3, \ldots) : x_i \in \mathbb{R} \text{ and } \sup_i |x_i| < \infty \right\}.
+    \]
+    Show that $(X,d)$ is a metric space when
+    \[
+        d(x,y) := \sup_i |x_i - y_i|.
+    \]
+    \proofspace
+    \newpage
+
+    \item Show directly from the definitions that
+    \[
+        G = \{ (x,y) \in \mathbb{R}^2 : 4x^2 + y^2 < 1 \}
+    \]
+    is open in $\mathbb{R}^2$ with the metric $d((x,y),(u,v)) = \sqrt{(x-u)^2 + (y-v)^2}$.
+    \proofspace
+\end{enumerate}
+
+\end{document}

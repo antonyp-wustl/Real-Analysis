@@ -1,0 +1,39 @@
+\documentclass{amsart}
+\title{Homework 3}
+\author{Antony Perez}
+\usepackage{amsthm,amssymb,amsmath,enumitem}
+\begin{document}
+\maketitle
+\subsection*{Problem 1} A complex number $z$ is said to be algebraic if there are integers $a_0, \ldots, a_n$, not all zero, such that 
+\[a_0z^n + a_1z^{n-1}+\ldots+a_{n-1}z + a_n = 0.\]
+Prove that the set of all algebraic numbers is countable. Hint: For every positive integer $N$ there are only finitely many equations with 
+\[n + |a_0| + |a_1|+ \ldots + |a_n| = N.\]
+\begin{proof}
+    To prove this, we must construct the set of all algebraic numbers, $A$, and create a bijection $f: A \rightarrow \mathbb{N}$. Each polynomial has at most $n$ roots by the Fundamental Theorem of Algebra. With our hint, we may sort the infinite possible polynomials into the form of $n + |a_0| + |a_1|+ \ldots + |a_n| = N$, where $N$ is some fixed value. Doing so, we can see that we get a finite set for whatever $N$ we choose, which is the same behavior displayed with polynomials. By doing so, we can create a sequence $S_N$ that collects all possible finite sets, and we can create a union such that $A = \bigcup_{N=1}^{\infty} S_N, N \in \mathbb{N}$. Since $N \in \mathbb{N}$, then there does exist a bijection $f: A \rightarrow \mathbb{N}$
+\end{proof}
+\subsection*{Problem 2} Prove that there exist real numbers which are not algebraic. Is the set of all irrational numbers countable? 
+\begin{proof}
+    We were told in class that $\mathbb{R}$ is uncountable. We show that $\mathbb{R} \setminus A$ is uncountable by supposing for contradiction that it is. If it were countable, then $(\mathbb{R} \setminus A) \cup A$ should be countable as well, but this results in $\mathbb{R}$, which is a contradiction. So, since $(\mathbb{R} \setminus A)$ is uncountable, there exists real numbers which are not algebraic. The set of all irrationals are not countable, by the same argument shown above, but instead of using $A$, we use $\mathbb{Q}$.
+\end{proof}
+\subsection*{Problem 3} Let $E'$ be the set of all limit points of a set $E.$ Prove that $E'$ is closed. Prove that $E$ and $\bar{E}$ have the same limit points. (Recall that $\bar{E}=E \cup E'$). Do $E$ and $E'$ always have the same limit points? 
+\begin{proof}
+    Let $p \in E'$. Let $X$ be an arbitrary neighborhood of $p$. Since $p$ is a limit point, there is a $q \in X$ such that $q \neq p$. Choose a neighborhood $Y$ of $q$ such that $p \not \in Y$ but $Y \subset X$. $q$ is a limit point, so there exists $r \in Y$ such that $r \neq q \implies r \neq p$. Thus, we have shown that an arbitrary limit point $p$ contains another limit point, showing that $E'$ is closed.  
+
+    Let $p$ be a limit point in $\bar{E}$. Let $X$ be an arbitrary neighborhood. Since $p$ is a limit point, there exists a $q \in X$ such that $q \neq p$. If $q \in E$, then finished. If $q \in E'$, then $q$ is a limit point of $E$. Since $q \neq p$, let $Y$ be a smaller neighborhood of $q$ that doesn't contain $p$. Since $q$ is a limit point of $E$, there exists a point $r \in Y$ such that $r \in E$ and $r \neq q$. Since $Y \subset X$, we have $r \in X$, and since $p \notin Y$, we have $r \neq p$. Thus, in either case, $X$ contains a point of $E$ different from $p$. Therefore, $E$ and $\bar{E}$ have the same limit points.
+
+  Let $E$ be the sequence $1/n$, where $n \in \mathbb{N}$. We see that $E$ has a limit point at 0, so $E' = \{0\}$. But taking the set of all limit points of $E'$ gives us $E'' = \emptyset$. Therefore, they do not always have the same limit points.   
+
+    
+\end{proof}
+\subsection*{Problem 4} Find a bijection between $(0,1)$ and $[0,1]$. 
+\begin{proof}
+    We want to show that there exists a bijection between $(0,1)$ and $[0,1]$. Both are subsets of $\mathbb{R}$, and are uncountably infinite. Let $s_n$ be an arbitrary sequence of distinct points in $(0,1)$. Let $s_1 \leftrightarrow 0$ and $s_2 \leftrightarrow 1$. From this, we see that $s_{n+2} \leftrightarrow s_n$ for all $n \in \mathbb{N}$. But, there may exist an $x$ such that $x\not\in s_n$, but is in $[0,1]$. To resolve this, we simply let $x=x$ in our function. Let us define our function: 
+    \[f(x) = \begin{cases}
+        0 \text{ if } x=s_1 \\ 
+        1 \text{ if } x = s_2 \\ 
+        s_n \text{ if } x = s_{n+2}, n \in \mathbb{N} \\ 
+        x \text{ if } x \neq s_n \forall n
+    \end{cases} \]
+   For Injectivity, the only inputs that give 0 and 1 are $s_1$ and $s_2$. The other cases have already been established in our function, therefore $f(x)$ is injective. For surjectivity, let $p \in [0,1]$. If $p=0$, $f(x) = 0 \implies x = s_1$. If $p = 1$, then $f(x)=1 \implies x = s_2$. If $p = s_n$, then $f(x) = s_n \implies x = s_{n+2}$. If $p = x$, then $f(x) = x \implies x=x$. Therefore, this is surjective. Thus, being both injective and surjective, this shows $f(x)$ is a bijection. 
+\end{proof}
+\end{document}
