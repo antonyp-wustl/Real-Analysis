@@ -1,0 +1,81 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm, mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+
+\pagestyle{plain}
+
+\begin{document}
+
+\begin{center}
+    {\large Math 4101 Practice Midterm}\\[2pt]
+    {\large Extra Practice Set}
+\end{center}
+
+\noindent Name: \underline{\hspace{2in}}
+
+\medskip
+\noindent Time: 50 minutes \hfill Total: 100 points
+
+\medskip
+\noindent \textbf{Directions.} Write complete proofs or arguments. Clearly state any definitions you use.
+Unless otherwise stated, all numbers are real. Throughout this exam, $\mathbb{N} = \{1, 2, 3, \dots\}$.
+
+\bigskip
+
+\noindent\textbf{Problem 1 (30 points).}
+
+\noindent Let
+\[
+S = \{x \in \mathbb{R} : x^3 \in \mathbb{Q}\}.
+\]
+
+\begin{enumerate}[label=(\alph*)]
+    \item (15 points) Prove that $S$ is countably infinite.
+    \item (15 points) Prove that $\mathbb{R} \setminus S$ is uncountable.
+\end{enumerate}
+
+\bigskip
+
+\noindent\textbf{Problem 2 (30 points).}
+
+\noindent Let $A \subseteq \mathbb{R}$ be nonempty and bounded below, and write $m = \inf A$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item (15 points) Prove that for every $\varepsilon > 0$, there exists $a \in A$ such that
+    \[
+    m \le a < m + \varepsilon.
+    \]
+    \item (15 points) Define
+    \[
+    T = \left\{ a + \frac{1}{n} : a \in A,\ n \in \mathbb{N} \right\}.
+    \]
+    Prove that $\inf T = m$. You may use part (a), even if you have not proved it.
+\end{enumerate}
+
+\bigskip
+
+\noindent\textbf{Problem 3 (40 points).}
+
+\noindent Use the standard metric $d(x,y) = |x-y|$ on $\mathbb{R}$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item (20 points) Let $U, V \subseteq \mathbb{R}$ be open. Prove directly from the definition of openness that $U \cup V$ is open.
+    \item (20 points) Suppose $U_n \subseteq \mathbb{R}$ is open for every $n \in \mathbb{N}$. Must
+    \[
+    \bigcup_{n=1}^{\infty} U_n
+    \]
+    be open? Give a proof or an explicit counterexample. If you give a counterexample, determine the union and justify your answer.
+\end{enumerate}
+
+\bigskip
+
+\noindent\textbf{Problem 4 (Bonus, 10 points).}
+
+\noindent Suppose $F_n \subseteq \mathbb{R}$ is closed for every $n \in \mathbb{N}$. Must
+\[
+\bigcup_{n=1}^{\infty} F_n
+\]
+be closed? Give a proof or an explicit counterexample. (Hint: think about how this problem relates to Problem 3, part (b), via complements and De Morgan's laws.)
+
+\end{document}

@@ -1,0 +1,91 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm, mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+
+\pagestyle{plain}
+
+\begin{document}
+
+\begin{center}
+    {\large Math 4101 Mid-term 1}\\[2pt]
+    {\large Version C}
+\end{center}
+
+\noindent Name: Antony Perez
+
+\medskip
+\noindent Time: 50 minutes \hfill Total: 100 points
+
+\medskip
+\noindent \textbf{Directions.} Write complete proofs or arguments. Clearly state any definitions you use.
+Unless otherwise stated, all numbers are real. Throughout this exam, $\mathbb{N} = \{1, 2, 3, \dots\}$.
+
+\bigskip
+
+\noindent\textbf{Problem 1 (30 points).}
+
+\noindent Let
+\[
+S = \{x \in \mathbb{R} : x^2 \in \mathbb{Q}\}.
+\]
+
+\begin{enumerate}[label=(\alph*)]
+    \item (15 points) Prove that $S$ is countably infinite.
+    \item (15 points) Prove that $\mathbb{R} \setminus S$ is uncountable.
+\end{enumerate}
+
+\begin{proof}
+    The set $\mathbb{Q}$ is countably infinite, done through zigzag argument. Since $\mathbb{Q} \subset S$, $S$ inherits the infinite property. To prove countability, let $S = \{\pm \sqrt{\alpha}: \alpha \in \mathbb{Q}, \alpha \geq 0\}$. If for some $\pm \sqrt{\alpha} \in \mathbb{Q}$, we can simply pair it with its corresponding element within $\mathbb{Q}$. Denote this as $S'$, which is countably infinite. We do not need to prove surjectivity or injectivity for this, since $S'$ is simply $\mathbb{Q}$. Let $S'' \coloneq \{ \pm \sqrt{\alpha}: \sqrt{\alpha} \not \in \mathbb{Q}, \alpha > 0, \alpha \in \mathbb{Q} \}$, which is a subset of $S$. Define a function $f: \{\alpha \in \mathbb{Q}_{>0}: \sqrt{\alpha} \not \in \mathbb{Q}\} \times \{+,-\} \rightarrow S''$. Let $f(\alpha, +) = \sqrt{\alpha}$ and $f(\alpha, -) = -\sqrt{\alpha}$. To prove injectivity, suppose $f(\alpha, \pm) = f(\beta, \pm)$. Thus, $\pm \sqrt{\alpha} = \pm \sqrt{\beta}$. Squaring both sides, we get $\alpha = \beta$. Now, given this, the signs matter, since $\sqrt{\alpha} > 0 \implies \alpha > 0$, thus $-\sqrt{\alpha} \neq \sqrt{\alpha}$. Thus, the signs must match in order to have equivalent values, proving injectivity. 
+
+    For surjectivity, take $y \in S''$. Thus, $y = \pm \sqrt{\alpha}$ for some $\alpha \in \mathbb{Q}_{>0}$. Set $f(\alpha, +)$ if $y = \sqrt{\alpha}$, and $f(\alpha, -)$ if $y = -\sqrt{\alpha}$. Either way, $y$ is being hit. Therefore, since $f$ is both injective and surjective, it is a bijection of a countably infinite set ($\mathbb{Q}_{>0} \subset \mathbb{Q}$ is infinite). 
+
+    Thus, since $S'$ and $S''$ are countably infinite, $S = S' \cup S''$ is countably infinite, since a finite union of countable sets is countable.
+
+    Suppose $\mathbb{R} \setminus S$ is countable. Suppose $\mathbb{R} = (\mathbb{R} \setminus S) \cup S$. Since $\mathbb{R} \setminus S$ is countable, and $S$ is also countable, the union of the two should also be countable. But we know that $\mathbb{R}$ is uncountably infinite, due to Cantor's diagonal argument. Thus, this is a contradiction. Therefore, $\mathbb{R} \setminus S$ is uncountable. 
+\end{proof}
+
+\bigskip
+
+\noindent\textbf{Problem 2 (30 points).}
+
+\noindent Let $A \subseteq \mathbb{R}$ be nonempty and bounded above, and write $s = \sup A$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item (15 points) Prove that for every $\varepsilon > 0$, there exists $a \in A$ such that
+    \[
+    s - \varepsilon < a \le s.
+    \]
+    \item (15 points) Define
+    \[
+    T = \left\{ a - \frac{1}{n} : a \in A,\ n \in \mathbb{N} \right\}. 
+    \]
+    Prove that $\sup T = s$. You may use part (a), even if you have not proved it.
+\end{enumerate}
+
+\begin{proof}
+    We are given that $s = \sup A$. Therefore, $\forall a \in A, a \leq s$. We are told to prove that there exists an element $a \in A$ such that $s-\epsilon < a \leq s$. Suppose not, and that $\forall a \in A, a \not \in(s - \epsilon, s]$. Therefore, $a < s - \epsilon$. It's given that $s$ is the least upper bound, and we found another upper bound that is less than $s$, so this is contradictory. 
+
+    Let $T \coloneq \{ a - \frac{1}{n} : a \in A, n \in \mathbb{N}\}$. Let $t \in T$. Thus, we see $t = a - \frac{1}{n}$ for some $a \in A, n \in \mathbb{N}$. We may deduce that $t = a - \frac{1}{n} < a \leq s$. Thus, $s$ is an upper bound. Since $\sup A = s$, from the last proof, $s-\epsilon < t \leq s$. This is proven because $\exists a > s - \epsilon/2$ and $\exists \frac{1}{n} < \epsilon/2$ such that $t > s - \epsilon$. Since $\epsilon$ is arbitrary, $s$ is the least upper bound for $T$. Thus, $\sup T = s$. 
+\end{proof}
+\bigskip
+
+\noindent\textbf{Problem 3 (40 points).}
+
+\noindent Use the standard metric $d(x,y) = |x-y|$ on $\mathbb{R}$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item (20 points) Let $U, V \subseteq \mathbb{R}$ be open. Prove directly from the definition of openness that $U \cap V$ is open.
+    \item (20 points) Suppose $U_n \subseteq \mathbb{R}$ is open for every $n \in \mathbb{N}$. Must
+    \[
+    \bigcap_{n=1}^{\infty} U_n
+    \]
+    be open? Give a proof or an explicit counterexample. If you give a counterexample, determine the intersection and justify why it is not open.
+\end{enumerate}
+\begin{proof}
+    Let $X = U \cap V$. If $X = \emptyset$, then it is open by definition. Thus, let $X \neq \emptyset$. Let $x \in X$. Since $x \in U$, $\exists r_1 > 0$ such that $B_{r_1}(x) \subseteq U$. Likewise, $x \in V \implies \exists r_2>0$ such that $B_{r_2}(x) \subseteq V$. Now let $r = \min(r_1,r_2)$.  Since $r \leq r_1$, $B_r(x) \subseteq B_{r_1}(x) \subseteq U$. Likewise, $r \leq r_2 \implies B_r(x) \subseteq B_{r_2}(x) \subseteq V$. Thus, $B_r(x) \subseteq U \cap V$.
+\end{proof}
+\begin{proof}
+    Let $X = \bigcap_{n=1}^{\infty} U_n$. Assume $X \neq \emptyset$. Let $x \in X$. Since $U_n$ is open for all $n$, then $B_{r_n}(x)$ for each $n$. Now, let $r=\min(r_1,r_2,r_3,\ldots) > 0$. But the minimum for infinitely many positive integers doesn't need to be positive. It can be zero. Thus, $X$ isn't open. 
+\end{proof}
+\end{document}

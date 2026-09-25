@@ -1,0 +1,49 @@
+\documentclass{amsart}
+\usepackage{amsmath,amsthm,amssymb, mathtools}
+\title{Homework 4}
+\author{Antony Perez}
+\newcounter{myletter}
+\begin{document}
+\maketitle    
+\newtheorem{lemma}{Lemma}
+\subsection*{1} Let $X$ be an infinite set. For $p \in X$ and $q \in X$, define 
+\[d(p,q) = \begin{cases}
+    1 & (\text{if } p \neq q) \\ 
+    0 & (\text{if } p = q)
+\end{cases}\]
+Prove that this is a metric. Which subsets of the resulting metric space are open? Which are closed? Which are compact?
+\begin{proof}
+    If $p=q$, then $d(p,q)=0$. If $p \neq q$, then $d(p,q) = d(q,p) = 1 > 0$. Let $t \in X$ such that $d(p,q) \leq d(p,t) + d(t,q)$. If $p=q$, then $0 \leq d(p,t) + d(t,q)$, so it holds. If $p \neq q$, then $1 \leq d(p,t) + d(t,q)$. Suppose $d(p,t) + d(t,q)$ is zero. This forces $t = p = q$, which is false, so $d(p,t) + d(t,q) \geq 1$. Thus, this is a metric. Let $A \subseteq X$ To prove openness, $\exists r > 0$ such that $B_r(p) \subseteq A$. Let $r <1$. Thus, we get $B_r(p) = \{p\} \subseteq A$, so this is true. Since $A$ was arbitrary, every subset of $X$ is open. Since $A^c$ is also an arbitrary subset of $X$, the same argument shows $A^c$ is open. By definition, a set is closed when its complement is open. So, $A$ is closed. Since $A$ was arbitrary, every subset of $X$ is closed. For compactness, if $K \subseteq X$ is finite, any open cover of $K$ has a finite subcover by picking an open cover for a singular point in $K$. If $K$ is infinite, consider the cover $\{\{p\} : p \in K\}$; each singleton is open, but since there are infinitely many points, there exists no finite open cover. Therefore, the compact subsets of $X$ are the finite subsets.
+\end{proof}
+\subsection*{2} Let $A_1,A_2,\ldots$ be subsets of a metric space.
+
+\begin{list}{\alph{myletter})}{\usecounter{myletter}}
+    \item If $B_n = \cup_{i=1}^n A_i$, prove that $\bar{B}_n = \cup_{i=1}^{n} \bar{A}_i$, for $n=1,2,3,\ldots$. 
+    \item If $B = \cup_{i=1}^\infty A_i$, prove that $\cup_{i=1}^\infty \bar{A}_i \subset \bar{B}$
+\end{list}
+Show, by an example, that this inclusion can be proper, that is, 
+\[ \bar{B} \supset \bigcup_{i=1}^\infty \bar{A}_i, \ \bar{B} \neq \bigcup_{i=1}^\infty \bar{A}_i \]
+\begin{proof}
+    Use induction. The base case is simple: $B_1 = A_1 \implies \bar{B_1} = \bar{A_1}$. Now assume $1,\ldots,n$ is true, and deduce $n+1$. Thus, we have $B_{n+1} = \bigcup_{i=1}^{n+1}A_i \implies B_{n+1} = B_{n} \cup A_{n+1}$. Now we must prove $\bar{B}_{n+1} = \bar{B}_n \cup \bar{A}_{n+1}$. 
+    \begin{lemma}
+        $\overline{X\cup Y} = \bar{X} \cup \bar{Y} $
+    \end{lemma}
+    \begin{proof}
+        $\overline{X \cup Y} = (X \cup Y) \cup (X \cup Y)'$ and $\bar{X} \cup \bar{Y} = (X \cup X') \cup (Y \cup Y')$. Unions hold the communative property, so $(X \cup X') \cup (Y \cup Y') = (X \cup Y) \cup (X' \cup Y')$. Now we show that $X' \cup Y' = (X \cup Y)'$. Let $p \in X'$, thus it is a limit point for $X$. Since it is a limit point of $X$, then it is a limit point for $X \cup Y$. Thus, $p \in (X \cup Y)'$. Let $q \in Y'$. Thus, it is a limit point for $Y$. Since it is a limit point for $Y$, we may deduce it is a limit point for $X \cup Y$. Therefore, $q \in (X\cup Y)'$. Thus, $X' \cup Y' = (X\cup Y)'$. Conversely, let $p \in (X\cup Y)'$ but $p \not \in X'$ and $p \not \in Y'$. Since $p \not \in X'$, there is a neighborhood $N_1$ with $N_1 \cap X \subseteq \{p\}$. Since $p \not \in Y'$, there is a neighborhood $N_2$ of $p$ with $N_2 \cap Y \subseteq \{p\}$. Let $N = N_1 \cap N_2$, taking the smaller radius. Then, $N \cap (X \cup Y) \subseteq \{p\}$, so $N$ has no point of $X\cup Y$ other than $p$, which contradicts $p \in (X \cup Y)'$. Now, referring to our original equation, $(X\cup Y) \cup (X \cup Y)' = (X \cup X')\cup (Y \cup Y')$. Rearranging, we get $(X\cup Y) \cup (X \cup Y)' = (X \cup Y)\cup (Y' \cup X')$. We can take out the $(X \cup Y)$, and since we have shown equivalency, we may deduce that these are the same. 
+    \end{proof}
+    Using our lemma, we see that $\bar{B}_{n+1} = \overline{B_n \cup A_{n+1}} \implies \bar{B}_{n+1} = \bar{B}_n \cup \bar{A}_{n+1}$. Thus, this is true by induction for part a.
+\end{proof}
+\begin{proof}
+    Since $B = \bigcup_{i=1}^\infty A_i$, we have $A_i \subseteq B$ for any $i$.  $A=\cup_{i=1}^n A_i \subseteq B \implies \bar{A} \subseteq \bar{B}$ from the first proof, it follows that $\bar{A}_i \subseteq \bar{B}$ for every $i$. Since this holds for each $i$, taking the union over all $i$ gives $
+    \bigcup_{i=1}^{\infty} \bar{A}_i \subseteq \bar{B}.$
+\end{proof}
+\subsection*{3} Regard $\mathbb{Q}$, the set of all rational numbers, as a metric space, with $d(p,q) = |p-q|$. Let $E$ be the set of all $p \in \mathbb{Q}$ such that $2 < p^2 < 3$. Show that $E$ is closed and bounded in $\mathbb{Q}$, but $E$ is not compact. Is $E$ open in $\mathbb{Q}$?
+\begin{proof}
+    Let $E = \{p \in \mathbb{Q}: \sqrt{2} < p < \sqrt{3}\}\sqcup \{p \in \mathbb{Q}: -\sqrt{3} < p < -\sqrt{2}\}$. Let $p \in E$. If $p>0$, then $p \in (\sqrt{2},\sqrt{3})$. If $p < 0$, then $p \in (-\sqrt{3},-\sqrt{2})$. In either case, we see $|p| < \sqrt{3}$, therefore it is bounded. To show $E$ is closed, let $a_n$ be a sequence in $E$ such that $2 < a_n^2 < 3$. If $a_n$ converges to $a \in \mathbb{Q}$, then $a \in E$. Thus, as $n \rightarrow \infty$, $a_n \cdot a_n \rightarrow a \cdot a$. Thus, since $a_n \in E$ for all $n$, we are given $2 \leq a^2 \leq 3$. But since $a \in \mathbb{Q}$, we are forced with $2 < a^2 < 3$. Thus, $E$ is closed since all convergent sequences in $E$ converge in $E$. To show that this is not compact, consider $G_n = \{(-\sqrt{3}-\frac{1}{n}, \sqrt{3} - \frac{1}{n} : n \in \mathbb{N})\}$. We see that if $p>0$, then it is covered by the positive side of $G_n$. If $p<0$, then it is covered by the negative side of $G_n$. Thus, $E \subseteq \bigcup_{n=1}^\infty \{G_n\}$ Let's suppose, for contradiction, we only need finitely many $G_n$ such that $E \subseteq \cup_{n=1}^N G_n$. If $G_n$ were finite, then we show that in the interval $(\sqrt{3}-\frac{1}{N}, \sqrt{3})$, where $N$ is the max index, there lies a rational $p$ in the interval through the Archimedean property. This is contradictory, since $p$ is rational and is between the interval, that shows $p \in E$, but this element is not covered in the finite open cover. If $N$ is small, we may introduce a new interval $(\max(\sqrt{3}-\frac{1}{N}, \sqrt{2}), \sqrt{3})$, which guards against this. Thus, $E$ is not compact. To show $E$ is open, we must show $E \subseteq E^\circ$. Thus, we must show that for any $p \in E$, $\exists r > 0$ such that $B_r(p) \subseteq E$. But we can immediately deduce that this is true, because the two sets that make up $E$ are open intervals. Therefore, $E$ is open.
+\end{proof}
+
+\subsection*{4} Construct and prove a compact set of real numbers whose limits points form a countable set. 
+\begin{proof}
+    Consider $E = \{\frac{1}{n}:n\in\mathbb{N}\} \cup \{0\}$. Let $p \in E$. Thus, any arbitrary element $p$ satisfies $0 \le p \le 1$, so $E \subseteq [0,1]$. We show $E' = \{0\}$. As $n \to \infty, \frac{1}{n} \to 0$, so $\{0\}$ is the only limit point of $E$. Every other point $\frac{1}{n}$ is isolated. We may consider an arbitrary $N>2 \in \mathbb{N}$  such that $\frac{1}{N-1} > \frac{1}{N} > \frac{1}{N+1}$. We may take $r = \min(\frac{\frac{1}{N} + \frac{1}{N-1}}{2}, \frac{\frac{1}{N} + \frac{1}{N+1}}{2})$, and we are able to construct a neighborhood $N_r(\frac{1}{N})$ that only contains $\frac{1}{N}$. Thus, each point, other than zero, is isolated. Since $E' = \{0\}, E' \subseteq E$, therefore $E$ is closed. Since $E$ is closed and bounded, $E$ is compact by theorem 2.41. 
+\end{proof}
+\end{document}
