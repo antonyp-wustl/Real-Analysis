@@ -1,0 +1,89 @@
+\documentclass{amsart}
+\usepackage{amsthm,amssymb,amsmath,mathtools,tasks}
+\DeclareMathOperator*{\R}{\mathbb{R}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\K}{\mathcal{K}}
+
+\title{Homework 5}
+\author{Antony Perez}
+
+\begin{document}
+\maketitle
+
+\subsection*{Problem 1} Recall the following theorem from textbook: \\ 
+\textit{If $\{K_\alpha\}$ is the collection of compact subsets of a metric space $X$ such that the intersection of every finite subcollection of $\{K_\alpha\}$ is nonempty, then $\bigcap K_\alpha$ is nonempty}. \\ 
+Give counterexamples showing that the above result becomes false if the word "compact" is replaced by "closed" or by "bounded."
+\begin{proof}
+    Replace the definition with "closed." Let $\K = [n,\infty]$, where $n \in \N$. Thus, we construct a finite collection: $\K_1 \cap \K_2 \cap \ldots \cap \K_n$. This would be equal to \\$[\max[\K_1,\K_2,\ldots,\K_n], \infty]$. Hence, the intersection is non-empty. But then we see 
+    \[
+    \bigcap_{n=1}^\infty \K_n = \emptyset
+    \]
+So closed breaks this theorem. \\
+Now replace "compact" with bounded. Choose $\ell = (0,\frac{1}{n})$, where $n \in \N$. Thus, we see $\ell_1 \cap \ldots \cap \ell_t = \frac{1}{n_1}\cap\ldots \cap \frac{1}{n_t}$. The intersection is equal to $(0,\frac{1}{\max [n_1,n_2,\ldots,n_t]})$. So, finite intersections are non-empty. But we see 
+\[
+\bigcap_{t=1}^{\infty}\ell_t = \emptyset
+\]
+So, bounded breaks this theorem as well. \\
+If "compact" is replaced by "bounded and closed," then this cannot be definitely true, because $X$ can be an arbitrary metric space such that $X \not \subseteq \R^n$. In fact, $X$ can be infinite dimensional. This would cause an issue, because Heine-Borel Theorem cannot be applied here, and we see that we need something more to conclude compactness. 
+\end{proof}
+\subsection*{Problem 2} For $x \in R^1$ and $y \in R^1$, define
+\[
+d_1(x,y) = (x-y)^2 
+\]
+\[
+d_2(x,y) = \sqrt{|x-y|} 
+\]
+\[
+d_3(x,y) = |x^2-y^2| 
+\]
+\[
+d_4(x,y) = |x-2y| 
+\]
+\[
+d_5(x,y) = \frac{|x-y|}{1+|x-y|}
+\]
+Determine, for each of these, whether it is a metric or not. 
+\begin{proof}
+    We see $\mathbf{d_1}$ is nonnegative and symmetric. We must show $d_1(x,z) \leq d(x,y) + d(y,z)$. Expanding this, we see $x^2 + z^2 - 2xz \leq x^2 + y^2 - 2xy + y^2 + z^2 - 2yz.$ Eliminating terms, we see $-2xz \leq 2y^2 - 2xy-2yz$, in which we see $-xz \leq y(y - x -z)$. We see if $x=0$, we let $y=z/2$, and we get $0 \leq \frac{z}{2}(-\frac{z}{2})$, which isn't possible. Thus, $\mathbf{d_1}$ is not a metric. 
+
+    For $\mathbf{d_2}$, we see that it is nonnegative, symmetric, and when using the triangle inequality, $\sqrt{|x-z|} \leq \sqrt{|x-y|+|y-z|}$ holds. Thus, $d_2$ is a metric. 
+
+    $d_3$ fails. Simply let $x=1$ and $y = -1$, and we get 0.
+
+    $d_4$ fails. $x = y$ results in a nonzero integer iff $x=y\neq 0$. 
+
+    For \(d_5(x,y)=\frac{|x-y|}{1+|x-y|}\), we have \(d_5(x,y)\geq0\), \(d_5(x,y)=0\iff x=y\), and \(d_5(x,y)=d_5(y,x)\).
+
+For the triangle inequality, let \(a=|x-y|\) and \(b=|y-z|\). Since \(|x-z|\leq a+b\),
+
+$$
+d_5(x,z)\leq\frac{a+b}{1+a+b}\leq\frac{a}{1+a}+\frac{b}{1+b}=d_5(x,y)+d_5(y,z).
+$$
+Thus \(d_5\) is a metric.
+\end{proof}
+\subsection*{Problem 3} Let $K_1$ and $K_2$ be compact subsets of a metric space $X$. 
+\begin{tasks}
+\task Prove that $K_1 \cup K_2$ is compact.
+\task Prove that $K_1 \cap K_2$ is compact.
+\task Give an example of infinitely many compact subsets of $\R$ whose union is not compact.
+\end{tasks}
+\begin{proof}
+    Let $A = \bigcup_{\alpha}^n U_\alpha$ be a finite subcovering of $K_1$ and let $B = \bigcup_{\alpha}^n I_\alpha$ be a finite subcovering of $K_2$. Since $K_1 \subseteq A$ and $K_2 \subseteq B$, we may deduce $K_1 \cup K_2 \subseteq A \cup B$. Since both $A$ and $B$ are a finite union of open covers, their union is also finite and open. \\
+    The same finite covering shown above can be used for $K_1 \cap K_2$. If you want to shorten the list of how many subcoverings necessary, we simply check the intersection between each subcovering with $K_1 \cap K_2:$ Let $p \in K_1 \cap K_2$. If $U_1 \cap (K_1 \cap K_2)$ contains $p$, then include that subcovering; otherwise, we exclude it from the list of necessary subcoverings. The same applied for $I_\alpha$ would yield us a smaller list of subcoverings necessary to cover $K_1 \cap K_2$. \\
+    Consider the compact sets $\{[-n,n]\}$. Taking finitely many of them, they are closed and bounded metric spaces, so they are compact. We see 
+    \[\bigcup_{n=1}^\infty [-n,n] = \R\]
+    but $\R$ is not compact. 
+\end{proof}
+\subsection*{Problem 4} Let $K \subset R^1$ consist of 0 and the numbers $\frac{1}{n}$ for $n \in \N$. Prove that $K$ is compact directly from the definition without using Heine Borel Theorem. 
+\begin{proof}
+    Let $K = \{\frac{1}{n}\} \cup \{0\},$ where $n \in \N$. Let $\{G_\alpha\}$ be a collection of open covers. We see that $K$ is closed, because $K = K \cup K'$, where $K' = \{0\}$, which is contained in $K$. We see $0 \in G_{\alpha_0}$. Since $G_{\alpha_0}$ is open, $\exists r > 0$ such that $(-r,r) \subseteq G_{\alpha_0}$. We see $\frac{1}{n} \to 0$ as $n \to \infty$; thus, $\exists N \in \N$ such that for $n \geq N, \frac{1}{n} \in G_{\alpha_0}$. Now, we may list the remaining points: $1,\frac{1}{2},\ldots, \frac{1}{N-1}$. These are finite, so we can dedicate a subcover for each point. Thus, we have $G_{\alpha_0},G_{\alpha_1},\ldots,G_{\alpha_{N-1}}$, which is a finite subcover. Thus, $K$ is compact. 
+\end{proof}
+\subsection*{Problem 5} Let $X$ be a metric space. Prove that $X$ is compact if and only if every family $\mathcal{F}$ of closed subsets of $X$ with the finite intersection property satisfies 
+\[\bigcap_{F \in \mathcal{F}}F \neq \emptyset.\]
+(Recall that $\mathcal{F}$ has the finite intersection property if the intersection of every finite subfamily of $\mathcal{F}$ is nonempty). 
+\begin{proof}
+    Suppose $\bigcap_{F \in \mathcal{F}}F = \emptyset$. Taking the complement, we see $X = X \setminus \bigcap_{F \in \mathcal{F}}F$. \\$ \bigcup_{F \in \mathcal{F}} (X \setminus F).$ Since every $F \in \mathcal{F}$ is closed, the complement is open. So $X \setminus F$ for each $F \in \mathcal{F}$ is an open cover for $X$. Thus, we see $X = (X \setminus F_1) \cup \ldots \cup (X \setminus F_n)$. Taking complements, we see $\emptyset = F_1 \cap \ldots \cap F_n$. This is a contradiction because it violates the finite intersection property. \\ 
+    Let $\K = \{U_\alpha\}$ be a collection of open covers. Suppose that there does not exist a finite open cover for $X$. Taking the complement of these open sets, we see that $\{X \setminus U_\alpha : U_\alpha \in \K \}$ is closed. Let $\mathcal{F}$ be this set. Taking a finite intersection of this, we see $(X \setminus U_{\alpha_1})\cap \ldots \cap (X \setminus U_{\alpha_n}) = X \setminus (U_{\alpha_1} \cup \ldots \cup U_{\alpha_n})$. Taking the complement, by our assumption, $(U_{\alpha_1} \cup \ldots \cup U_{\alpha_n}) \neq X$, which implies $X \setminus (U_{\alpha_1} \cup \ldots \cup U_{\alpha_n}) \neq \emptyset$. With what is given, $\bigcap_{F \in \mathcal{F}}F = X \setminus \bigcup_{\alpha}U_\alpha$. Since $\K$ is an open cover, $\bigcup_{\alpha}U_{\alpha} = X$. But this implies $X \setminus X = \emptyset$. A contradiction. Therefore, $X$ is compact.
+\end{proof}
+\end{document}
