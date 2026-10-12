@@ -1,0 +1,176 @@
+
+\documentclass[12pt]{amsart}
+
+%==================== Packages ====================
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}              % paired delimiters, \coloneqq, etc.
+\usepackage{enumitem}               % control list labels
+\usepackage{bm}                     % bold math: \bm{v}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}  % load last
+
+\allowdisplaybreaks                 % let long align blocks break across pages
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*}  % problem parts as (a), (b), (c)
+
+%==================== Number systems ====================
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+
+%==================== Linear algebra ====================
+\DeclareMathOperator{\Ran}{Ran}         % range (Treil); \ker already exists
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\spn}{span}        % NOT \span: that's a TeX primitive
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\col}{Col}
+\DeclareMathOperator{\row}{Row}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\id}{id}
+\newcommand{\Mat}[2]{M_{#1\times #2}(\F)}   % \Mat{m}{n} -> M_{m x n}(F)
+\newcommand{\Pn}[1][n]{\mathcal{P}_{#1}}    % \Pn -> P_n, \Pn[3] -> P_3
+\newcommand{\tp}{^{\mathsf{T}}}             % A\tp -> A^T
+\newcommand{\inv}{^{-1}}                    % A\inv -> A^{-1}
+\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\newcommand{\pmat}[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+%==================== Analysis / topology ====================
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\interior}{int}    % NOT \int: that's the integral sign
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\supp}{supp}
+\newcommand{\closure}[1]{\overline{#1}}
+\newcommand{\pre}{^{\mathrm{pre}}}          % f\pre(V), Pugh's preimage
+\newcommand{\nbhd}[2]{N_{#1}(#2)}           % \nbhd{r}{p} -> N_r(p), Rudin
+\newcommand{\limn}{\lim_{n\to\infty}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dd}{\,\mathrm{d}}              % \int f(x)\dd x
+\newcommand{\restr}[2]{\left.#1\right|_{#2}}  % \restr{f}{A} -> f|_A
+\newcommand{\seq}[2][n]{\left(#2\right)_{#1\in\N}}  % \seq{p_n} -> (p_n)_{n in N}
+
+%==================== Delimiters (mathtools) ====================
+% \abs{x} normal size; \abs*{x} auto-sizes; \abs[\big]{x} manual size
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\inner}{\langle}{\rangle}
+\DeclarePairedDelimiterX{\set}[1]{\lbrace}{\rbrace}{#1}
+\DeclarePairedDelimiterX{\setof}[2]{\lbrace}{\rbrace}{#1 \,:\, #2}  % \setof{x\in\R}{x>0}
+
+%==================== Logic shortcuts ====================
+\newcommand{\contra}{\Rightarrow\!\Leftarrow}   % contradiction marker
+\newcommand{\st}{\text{such that }}
+
+%==================== Theorem environments ====================
+\theoremstyle{plain}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+\theoremstyle{definition}
+\newtheorem*{definition*}{Definition}
+\theoremstyle{remark}
+\newtheorem*{remark*}{Remark}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}       % black box
+
+% Problem header using the textbook's exercise number: \begin{problem}{2.5}
+\newenvironment{problem}[1]{\par\medskip\noindent\textbf{#1.}\ }{\par\smallskip}
+% For computational answers that aren't proofs
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+%==================== Document ====================
+\title{Homework 6}
+\author{Antony Perez}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{problem}{1}
+Let $(X,d)$ be a metric space, let $K \subset X$ be compact, and let $\mathcal{U}$ be an open cover of $K$. Prove that there exists a number $\delta > 0$ \st for every $x \in K$, there is some $U \in \mathcal{U}$ for which 
+\[
+B(x,\delta)\cap K \subset U.
+\] 
+Such a number $\delta$ is called a \textit{Lebesgue number} for the cover $\mathcal{U}$ (relative to $K$).
+\end{problem}
+
+\begin{proof}
+    Suppose for contradiction that there is no Lebesgue number. Let $a_n \in K$. Thus, for any $n$, $B(a_n,1/n)\cap K \not \subseteq U.$ By compactness, there exists a convergent subsequence such that $a_{n_k} \to p$. By closedness, $p \in K$. $\mathcal{U}$ covers $K$, so $p \in U_0$, where $U_0 \in \mathcal{U}$. Since $U_0$ is open, there exists an $r>0$ such that $B(p,r) \subseteq U_0$. Now choose a $k$ large enough so that $d(a_{n_k}, p) < r/2$ and $1/n_k < r/2$. This is true, because $1/n_k \to 0$ as $n_k \to \infty$. Now let $x \in B(a_{n_k},1/n_k)\cap K$. By triangle inequality, $d(x,p) \le d(x,a_{n_k}) + d(a_{n_k},p) < 1/n_k + r/2 < r$. Therefore, $x \in B(p,r)$. $x$ was abitrary, so $B(a_{n_k},1/n_k) \cap K \subseteq U_0$. This yields a contradiction. Thus, $\delta$ exists. 
+\end{proof}
+
+\begin{problem}{2}
+Let $X$ be a metric space, let $K \subset X$ be a nonempty compact set, and let $p \in X \setminus K $ ($K^c$). Define 
+\[
+d(p,K) = \inf\{d(p,x):x \in K\}.
+\]
+Prove that there exists $x_0 \in K$ \st 
+\[
+d(p,K) = d(p,x_0) > 0.
+\]
+In particular, show that a point outside a compact set has positive distance from that set. 
+\end{problem}
+
+\begin{proof}
+    $p \in K^c$. Since $K$ is compact, $K$ is closed and bounded, and its complement is open. Thus, $\exists r > 0$ \st $B(p,r) \cap K = \emptyset$. This proves that for $\forall x\in K,$ $d(p,x) \ge r > 0$. Now we must show that $d(p,K)$ is attainable (infimum exists). Let $f:X \to \R$ be defined by $d(p,x)$, where $x \in X$. Using the reverse triangle inequality, $|d(x,p)-d(y,p)| \le d(x,y)$. Let $d(x,y) < \epsilon$, where $\epsilon > 0$. Thus, by reverse triangle inequality, $f$ is continuous. Now, define a sequence $x_n \in K$ \st $d(p,x_n) \to d(p,x_0)$. We can see that $d(p,x_0) \le d(p,x_n) < d(p,x_n) + 1/n$. A subsequence converges to $x_0 \in K$, where convergence and the limit point containment are given by the compactness. Thus, $d(p,x_0) = \lim d(p,x_{n_k})$. Thus, $x_0$ does exist. 
+\end{proof}
+
+\begin{problem}{3}
+Let $C_0 = [0,1]$. Obtain $C_1$ by removing the open middle third $(1/3,2/3)$ from $C_0$. Inductively, obtain $C_n$ from $C_{n-1}$ by removing the open middle third of each interval in $C_{n-1}.$ The Cantor set is 
+\[
+C = \bigcap_{n=0}^{\infty} C_n.
+\]
+\begin{enumerate}
+  \item[(a)]   Prove that $C_n$ is the union of $2^n$ pairwise disjoint closed intervals, each of length $3^{-n}$.
+  \item[(b)]   Prove that the Cantor set $C$ is nonempty and compact.
+  \item[(c)]   Prove that $C$ contains no nonempty open interval. Hence $C$ has empty interior. 
+\end{enumerate}
+
+\end{problem}
+
+\begin{proof}
+    Use induction. We see $C_0 = [0,1]$, so we have one closed interval with length 1. Now assume $C_n$ satisfies these conditions, and deduce $C_{n+1}$. To obtain $C_{n+1}$, we take $C_n$ and cut out the middle of each interval. This produces two disjoint intervals for each mother interval, thus giving us $2 \cdot 2^n = 2^{n+1}$, and its length would be $3^{-n}/3 = 3^{-(n+1)}$. Since the intervals in $C_n$ are pairwise disjoint, the resulting intervals of $C_{n+1}$ are also pairwise disjoint. Hence, $C_{n+1}$ is the union of $2^{n+1}$ disjoint intervals, each of length $3^{-(n+1)}$. \\
+    Let $E$ be the set of endpoints of all the $C^n$ intervals. An endpoint of $C_n$ remains an endpoint for $C_{n+1}$, and so on. This is because removing the middle third of the intervals never touches the endpoints. So $E \subseteq C$. $E$ is infinite, so $C$ is nonempty and infinite. Each $C_n$ is a finite union of closed bounded intervals, so it is compact by Heine-Borel Theorem. Since $C \neq \emptyset$, and each $C_n$ is closed and bounded in $[0,1]$, so $C$ is compact. \\
+    Now suppose for contradiction that there does exist an open interval in $C$. Let $c$ be in this open interval. Thus, for $\epsilon > 0$, $B(c,\epsilon) \subseteq C$. Since $C \subseteq C_n$, $B(c,\epsilon) \subseteq C_n$. Thus, $c$ must lie in one of those intervals. Choose $1/3^n$ such that $1/3^n < 2\epsilon$ (obtained by extracting diameter of ball). At whatever $n$ chosen, $B(c,\epsilon) \not \subseteq C_n$. But $B(c,\epsilon) \subseteq C$, and $C \subseteq C_n$. Thus, this is a contradiction. Therefore, $C$ contains no nonempty open interval. 
+\end{proof}
+
+\begin{problem}{4}
+Recall that a ternary expansion of $x \in [0,1]$ has the form
+\[x = \sum_{n=1}^{\infty} \frac{a_n}{3^n} = 0.a_1a_2a_3\ldots \ a_n \in \{0,1,2\}\]
+\begin{enumerate}
+    \item[(a)] Prove that $x \in C$ if and only if $x$ has a ternary expansion using only the digits 0 and 2. Be careful about numbers that have two ternary expansions, for example 
+    \[\frac{1}{3}=0.1_3 = 0.02222\ldots_3\]
+    \item[(b)] Use part (a) to prove that the Cantor set is uncountable.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+    Let $x \in C$. 
+\end{proof}
+
+\begin{problem}{5} Let $X$ be a metric space.
+    \begin{enumerate}
+    \item[(a)]
+    Let $\{E_\alpha\}_{\alpha \in A}$ be a collection of connected subsets of $X$ such that 
+    \[\bigcap_{\alpha \in A} E_\alpha \neq \emptyset.\]
+    Prove that $\bigcup_{\alpha \in A} E_\alpha$ is connected. 
+    \item[(b)] Let $E \subset X$ be connected and suppose
+    \[
+    E \subset F \subset \overline{E}.
+    \]
+    Prove that $F$ is connected. In particular, deduce that the closure of $\overline{E}$ of a connected set is connected.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+    Suppose $\bigcup_{\alpha \in A} E_\alpha = A \sqcup A^c,$ where $A$ is a proper clopen set. Since $\bigcap_{\alpha \in A} E_\alpha \neq \emptyset$, let $p \in \bigcap_{\alpha \in A} E_\alpha$. From this, let $p \in A$. For each $E_\alpha$, we see $p \in A \cap E_\alpha$. Since each $E_\alpha$ is connected and nonempty, $A \cap E_\alpha$ must be all of $E_\alpha$. This is because of $E_\alpha$ being clopen, by inheritance principle, forces $E_\alpha$ to be the empty set or all of $E_\alpha$. Hence $E_\alpha \subseteq A$ for every $\alpha$. So $\bigcup_{\alpha \in A} E_\alpha \subseteq A$, and $A^c = \emptyset$, contradicting properness. 
+\\
+Prove the contrapositive. Suppose $F = A \sqcup A^c$, where $A$ is a proper clopen subset in $F$. Let $K = A \cap F$ and $L = A^C \cap F$. This gives clopen subsets in $S$ by inheritance principle. Connectedness of $E$ forces either $K$ or $L$ to be the empty set. Suppose $K = \emptyset$. Let $p \in A$. Create a ball $B(p,r)$, where $r > 0,$ such that $B(p,r) \cap E = \emptyset$. But $p \in F \subseteq \overline{E}$, and every ball around $p$ intersects $E$. Contradiction. 
+\end{proof}
+
+\end{document}
